@@ -1,0 +1,43 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+Welcome to Tweetme 2
+
+<div id='tweets'>
+    Loading...
+</div>
+
+<script>
+    const tweetsElement = document.getElementById("tweets")
+    tweetsElement.innerHTML = 'Loading...'
+
+    
+    const xhr = new XMLHttpRequest()
+    const method = 'GET'
+    const url = '/tweets'
+    const responseType = 'json'
+
+    function formatTweetElement(tweet) {
+
+        var formattedTweet = "<div class='mb-4'><h1>" + tweet.id + "</h1>" + "<p>" + tweet.content + "</p></div>"
+        return formattedTweet
+    }
+    xhr.responseType = responseType
+    xhr.open(method, url)
+    xhr.onload = function () {
+        
+        const serverResponse = xhr.response
+        const listedItems = serverResponse.response
+        var finalTweetStr = ""
+        var i;
+        for (i=0; i<listedItems.length; i++) {
+            var tweetObj = listedItems[i] 
+            var currentItem = formatTweetElement(tweetObj)
+            finalTweetStr += currentItem
+        }
+        tweetsElement.innerHTML = finalTweetStr
+    }
+    xhr.send()
+
+</script>
+{% endblock content %}
