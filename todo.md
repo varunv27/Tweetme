@@ -1,9 +1,11 @@
 1. Tweets
     -> Creating
     -> Text
-    ->Image
+    -> Image
     -> Deleting
-    ->Retweeting
+    -> Retweeting
+    -> Liking
+
 2. Users
     -> Register
     -> Login
